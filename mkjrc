@@ -1,0 +1,49 @@
+#!/bin/bash
+
+usage="Usage: $0 [-t class_template_path | -tf template_folder] class_name ..."
+template_folder="/home/alessand.silacci/templates/"
+single_template_file=false
+template_file="$template_folder/class"
+
+#if test "$1"=""
+#then
+#   echo $usage
+#   exit 1
+#fi
+while getopts "t:tf:vxh" param
+do
+   case $param in
+         t) template_file=$OPTARG;;
+         tf) template_folder=$OPTARG;;
+         h) echo $usage
+         echo
+         echo "where"
+         echo "-t class_template_path is the class template to use"
+         echo "-tf template_folder the path to the folder containing the templates"
+         echo "-v enable verbose mode"
+         echo "-x enable debug mode"
+         exit 0;;
+         v) verbose=true;;
+         x) set -x;;
+         \?) echo "unknown option"
+         echo $usage
+         exit 1;;
+  esac
+done
+shift $(($OPTIND-1)) # shifting all the arguments
+class_name=$1
+
+if test $single_template_file=true
+then
+   if test -r "$template_file"
+   then 
+      cat $template_file | sed -e "s/{{CLASS_NAME}}/$class_name/g" > "$class_name.jr"
+   else
+      exit 1     
+   fi
+else
+   if test $custom_template_folder=true
+   then
+      echo "hello"
+   fi
+fi
