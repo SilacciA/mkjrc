@@ -1,0 +1,28 @@
+#=============================================
+#
+# This file lets you create a cvs project
+#
+# Author: Alessandro Silacci
+# Date: 30.09.2015
+# Context: Concurrent programming HEIA-FR
+#
+#=============================================
+#!/bin/bash
+if test "$1" = ""
+then
+   echo "Usage: $0 project_name"
+fi
+
+mkdir $1 && cd $1 && cvs $CVSDIR import -kkv -m "Directory create" $1 vendor release && cd .. && rmdir $1 && cvs $CVSDIR checkout $1
+echo "Lets hope it worked. In any case thank you for using the $0 script"
+cd $1
+create_class=true
+while test $create_class = true
+do
+   read -p "Do you want to create a new class for the project ? (Y/n)" cc
+   case $cc in
+      n)  create_class=false;;
+      *) read -p "Name of the class you want to create: " c_name
+         mkjrc $c_name;;
+   esac
+done
