@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage="Usage: $0 [-t class_template_path | -tf template_folder] class_name ..."
-template_folder="/home/alessand.silacci/templates/"
+template_folder="$HOME/templates/"
 single_template_file=false
 template_file="$template_folder/class"
 
