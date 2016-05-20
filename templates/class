@@ -1,0 +1,13 @@
+// $Header$
+import edu.ucdavis.jr.JR;
+
+public class {{CLASS_NAME}}{
+   
+   public {{CLASS_NAME}}(){
+   
+   }
+}
+
+/*
+** $Log$
+*/

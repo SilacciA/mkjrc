@@ -2,27 +2,31 @@
 
 usage="Usage: $0 [-t class_template_path | -tf template_folder] class_name ..."
 template_folder="$HOME/templates/"
-single_template_file=false
-template_file="$template_folder/class"
+single_template_file=true
+template_file="$template_folder/class" # TODO: change this to simple template file name
+class_type="class"
 
 #if test "$1"=""
 #then
 #   echo $usage
 #   exit 1
 #fi
-while getopts "t:tf:vxh" param
+while getopts "t:tf:evxh" param
 do
    case $param in
-         t) template_file=$OPTARG;;
          tf) template_folder=$OPTARG;;
          h) echo $usage
          echo
          echo "where"
          echo "-t class_template_path is the class template to use"
          echo "-tf template_folder the path to the folder containing the templates"
+         echo "-e for creating a handler of exceptions"
          echo "-v enable verbose mode"
          echo "-x enable debug mode"
          exit 0;;
+         e) class_type="handler"
+            template_file="$template_folder/handler";;
+         t) template_file="$template_folder/$OPTARG";;
          v) verbose=true;;
          x) set -x;;
          \?) echo "unknown option"
@@ -46,4 +50,25 @@ else
    then
       echo "hello"
    fi
+fi
+
+if test $class_type = "handler"
+then
+   stop_exception_handling=true
+   while test $stop_exception_handling = true
+   do
+      read -p "Name of the exception you want to handle:" exception
+      echo "   public handler void handle$exception($exception e){" >> "$class_name.jr"
+      echo "      // TODO: replace with handle code" >> "$class_name.jr"
+      echo "   }" >> "$class_name.jr"
+      read -p "Handle another exception ? [Yn]" handle_more
+      case $handle_more in
+         n) stop_exception_handling=false;;
+      esac
+  done
+  echo "}" >> "$class_name.jr"
+  # TODO: replace following block with a template file of the footer
+  echo "/*" >> "$class_name.jr"
+  echo '** $Log$' >> "$class_name.jr"
+  echo "*/" >> "$class_name.jr"
 fi

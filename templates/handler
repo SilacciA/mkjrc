@@ -1,0 +1,9 @@
+// $Header$
+import edu.ucdavis.jr.JR;
+
+public class {{CLASS_NAME}} implements edu.ucdavis.jr.Handler{
+   
+   public {{CLASS_NAME}}(){
+   
+   }
+
