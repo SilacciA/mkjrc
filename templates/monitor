@@ -1,0 +1,20 @@
+// $Header$
+
+_monitor {{CLASS_NAME}}{
+   
+   public {{CLASS_NAME}}(){
+   
+   }
+
+   _proc void consume(){
+      // example of a consumer method
+   }
+
+   _proc void produce(){
+      // example of a consumer method
+   }
+}
+
+/*
+** $Log$
+*/
