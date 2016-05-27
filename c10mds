@@ -1,0 +1,103 @@
+#!/bin/bash
+usage="Usage: $0 [-s] files..."
+silent=false
+if test "$1" = ""
+then
+   echo $usage
+   exit 1
+fi
+
+if test "$1" = "-s"
+then
+   silent=true
+fi
+shift 1
+check_120=false
+check_indent=false
+check_comm=false
+check_magic=false
+check_const=false
+check_cvs=false
+check_import=false
+check_catch=false
+while test "$1" != ""
+do
+   if test $silent = false
+   then
+      # commandement 7
+      read -p "Do you want to check the 120 characters limit on file $1? (y/N)" check_7
+      case "$check_7" in 
+         y*) check_120=true;;
+      esac
+      # commandement 4
+      read -p "Do you want to check the indentation of the file $1? (y/N)" check_4
+      case "$check_4" in
+         y*) check_indent=true;;
+      esac
+      # commandement 1-3
+      read -p "Do you want to check the comments of the file $1? (y/N)" check_13
+      case "$check_13" in
+         y*) check_comm=true;;
+      esac
+      # commandement 5
+      read -p "Do you want to check for magic numbers in the file $1? (y/N)" check_5
+      case "$check_5" in
+         y*) check_magic=true;;
+      esac
+      # commandement 6
+      read -p "Do you want to check for the constants names in the file $1? (y/N)" check_6
+      case "$check_6" in
+         y*) check_const=true;;
+      esac
+      # commandement 8
+      read -p "Do you want to check the CVS comments rule in the file $1? (y/N)" check_8
+      case "$check_8" in
+         y*) check_cvs=true;;
+      esac
+      # commandement 9
+      read -p "Do you want to check for malicious imports in the file $1? (y/N)" check_9
+      case "$check_9" in
+         y*) check_import=true;;
+      esac
+      # commandement 10
+      read -p "Do you want to check for possible uncommented exceptions in the file $1? (y/N)" check_10
+      case "$check_10" in
+         y*) check_catch=true;;
+      esac
+   fi
+   if test $check_120 = true
+   then
+      cat $1 | awk 'length($0) > 120'
+   fi
+   if test $check_indent = true
+   then
+      # create awk script for that
+   fi
+   if test $check_comm = true
+   then
+      # create awk script for that
+   fi
+   if test $check_magic = true
+   then
+      # TODO: test it
+      cat $1 | sed -r 's/([(]|[)]|[( ]|[) ])[0-9]+/\1/g'
+   fi
+   if test $check_const = true
+   then
+      # TODO: test it
+      cat $1 | sed -r 's/public static final int [a-z]+[A-Z]*[a-z]*/\1/g'
+   fi
+   if test $check_cvs = true
+   then
+      # create awk script for that
+   fi
+   if test $check_import = true
+   then
+      # TODO: test it
+      cat $1 | sed -r 's/$import/\1/g'
+   fi
+   if test $check_catch = true
+   then
+      # create awk script for that
+   fi
+done
