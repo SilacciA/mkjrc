@@ -6,7 +6,7 @@ What ?! You don't know JR ?! How can you not know it ! Google it as you'd do for
 Well this repo does not only contain a little helper for the project, but is mainly designed for a concurrent programming course
 I have in my class. Project are CVS (the steampunk version of versioning) compatible, that's why you should be careful when using it,
 especially when creating a new project. We have a hard but very sympathic teacher that impose us the 10 commandements of coding
-(but there are a good thing to follow even if you don't have the same teacher), so one of the utility is dedicated to this.
+(but they are made of good practices to follow even if you don't have the same teacher), so one of the utility is dedicated to this.
 ### Tools
 As I can't remember the exact work I've done this last months, I assume that you can read some code (careful its far from poetry).
 Here are the tools and their purpose:
